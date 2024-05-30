@@ -1,0 +1,288 @@
+{
+  "bookingTimes": [
+    {
+      "id": 631,
+      "utilityId": 84,
+      "TimeRange": "6-7",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 632,
+      "utilityId": 84,
+      "TimeRange": "7-8",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 633,
+      "utilityId": 84,
+      "TimeRange": "8-9",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 634,
+      "utilityId": 84,
+      "TimeRange": "9-10",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 635,
+      "utilityId": 84,
+      "TimeRange": "10-11",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 636,
+      "utilityId": 84,
+      "TimeRange": "11-12",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 637,
+      "utilityId": 84,
+      "TimeRange": "14-15",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 638,
+      "utilityId": 84,
+      "TimeRange": "15-16",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 639,
+      "utilityId": 84,
+      "TimeRange": "16-17",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 640,
+      "utilityId": 84,
+      "TimeRange": "17-18",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 641,
+      "utilityId": 84,
+      "TimeRange": "18-19",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 642,
+      "utilityId": 84,
+      "TimeRange": "19-20",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 643,
+      "utilityId": 84,
+      "TimeRange": "20-21",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 644,
+      "utilityId": 84,
+      "TimeRange": "21-22",
+      "utilityName": "Tenis"
+    },
+    {
+      "id": 977,
+      "utilityId": 132,
+      "TimeRange": "6-7",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 978,
+      "utilityId": 132,
+      "TimeRange": "7-8",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 979,
+      "utilityId": 132,
+      "TimeRange": "8-9",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 980,
+      "utilityId": 132,
+      "TimeRange": "9-10",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 981,
+      "utilityId": 132,
+      "TimeRange": "10-11",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 982,
+      "utilityId": 132,
+      "TimeRange": "11-12",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 983,
+      "utilityId": 132,
+      "TimeRange": "14-15",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 984,
+      "utilityId": 132,
+      "TimeRange": "15-16",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 985,
+      "utilityId": 132,
+      "TimeRange": "16-17",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 986,
+      "utilityId": 132,
+      "TimeRange": "17-18",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 987,
+      "utilityId": 132,
+      "TimeRange": "18-19",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 988,
+      "utilityId": 132,
+      "TimeRange": "19-20",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 989,
+      "utilityId": 132,
+      "TimeRange": "20-21",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 990,
+      "utilityId": 132,
+      "TimeRange": "21-22",
+      "utilityName": "SDN"
+    },
+    {
+      "id": 655,
+      "utilityId": 86,
+      "TimeRange": "6-7",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 656,
+      "utilityId": 86,
+      "TimeRange": "7-8",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 657,
+      "utilityId": 86,
+      "TimeRange": "8-9",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 658,
+      "utilityId": 86,
+      "TimeRange": "9-10",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 659,
+      "utilityId": 86,
+      "TimeRange": "10-11",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 660,
+      "utilityId": 86,
+      "TimeRange": "11-12",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 661,
+      "utilityId": 86,
+      "TimeRange": "14-15",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 662,
+      "utilityId": 86,
+      "TimeRange": "15-16",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 663,
+      "utilityId": 86,
+      "TimeRange": "16-17",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 664,
+      "utilityId": 86,
+      "TimeRange": "17-18",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 665,
+      "utilityId": 86,
+      "TimeRange": "18-19",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 666,
+      "utilityId": 86,
+      "TimeRange": "19-20",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 667,
+      "utilityId": 86,
+      "TimeRange": "20-21",
+      "utilityName": "SCL"
+    },
+    {
+      "id": 668,
+      "utilityId": 86,
+      "TimeRange": "21-22",
+      "utilityName": "SCL"
+    }
+  ],
+  "bookingPlaces": [
+    {
+      "id": 862,
+      "name": "Sân Tennis Công Viên số 02",
+      "shortCode": "cv2"
+    },
+    {
+      "id": 861,
+      "name": "Sân Tennis Công Viên số 01",
+      "shortCode": "cv1"
+    },
+    {
+      "id": 860,
+      "name": "Sân Tennis Vinschool số 02",
+      "shortCode": "vs2"
+    },
+    {
+      "id": 859,
+      "name": "Sân Tennis Vinschool số 01",
+      "shortCode": "vs1"
+    },
+    {
+      "id": 1324,
+      "name": "Sân Đa Năng",
+      "shortCode": "sdn"
+    },
+    {
+      "id": 867,
+      "name": "Sân Cầu Lông",
+      "shortCode": "scl"
+    }
+  ]
+}

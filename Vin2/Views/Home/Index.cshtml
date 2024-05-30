@@ -1,0 +1,268 @@
+﻿@using Vin2Api
+@inject Vin2Account _vin2Account
+@inject Vin2BookingData _vin2BookingData
+@inject Vin2Booking _vin2Booking
+@inject Vin2Request _vin2Request
+
+@section Styles {
+    <style>
+        #accountRaw, #bookingRaw {
+            max-height: 400px !important;
+            overflow-y: auto !important;
+        }
+        .form-group {
+            position: relative;
+        }
+        .form-group > .form-control {
+            margin-top: 20px;
+        }
+        .form-group > label {
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            background: #fff;
+            padding-left: 5px;
+            padding-right: 5px;
+            font-weight: bold;
+            font-size: .9rem;
+        }
+    </style>
+}
+
+@{
+    var totalToken = _vin2Account.Vin2AccountArray.Count(x => !string.IsNullOrEmpty(x.Token));
+    var xRequest = _vin2Booking.Vin2BookingConfigs?.XRequest ?? 1;
+    var totalBooking = Math.Min(_vin2BookingData.Vin2BookingArray.Count, totalToken) * xRequest;
+}
+
+<div class="row mt-2">
+    <div class="col-12">
+        <button onclick="saveConfigs()" class="btn btn-sm btn-primary">Save</button>
+        <a id="time" href="javascript:;" class="btn btn-sm btn-info"></a>
+        <a id="bookingInfo" href="javascript:;" class="btn btn-sm btn-info">Booking array: @_vin2BookingData.Vin2BookingArray.Count, Total token: @totalToken, Total booking: @totalBooking</a>
+        <button onclick="startBooking()" class="btn btn-sm btn-primary">Save & Start</button>
+        <button onclick="startBooking(true)" class="btn btn-sm btn-primary">Save & Start test</button>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        <button id="takeAccountTokens" onclick="takeAccountTokens(false)" class="btn btn-sm btn-primary">Login (@totalToken/@_vin2Account.Vin2AccountArray.Count)</button>
+        <button onclick="takeAccountTokens(true, null)" class="btn btn-sm btn-primary">Login & CountApartment </button>
+        <button onclick="takeAccountTokens(false, '@_vin2Request.UtilityId_Tenis')" class="btn btn-sm btn-primary">Login & CheckTenis </button>
+        <button onclick="takeAccountTokens(false, '@_vin2Request.UtilityId_SDN')" class="btn btn-sm btn-primary">Login & CheckSDN </button>
+        <button onclick="takeAccountTokens(false, '@_vin2Request.UtilityId_SCL')" class="btn btn-sm btn-primary">Login & CheckSCL </button>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-6">
+        <div class="form-group">
+            <label for="accountRaw">Accounts</label>
+            <textarea id="accountRaw" class="form-control" placeholder="AccountRaw">@_vin2Account.Vin2AccountRaw</textarea>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="TakeTokenTime">TakeToken</label>
+                    <input type="text" class="form-control" id="TakeTokenTime" placeholder="TakeTokenTime" value="@((_vin2Booking.Vin2BookingConfigs?.TakeTokenTimeCS)?.ToString("HH:mm:ss.fff"))">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="ResolveCaptchaTime">ResolveCaptcha</label>
+                    <input type="text" class="form-control" id="ResolveCaptchaTime" placeholder="ResolveCaptchaTime" value="@((_vin2Booking.Vin2BookingConfigs?.ResolveCaptchaTimeCS)?.ToString("HH:mm:ss.fff"))">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="SubmitRequestTime">SubmitRequest</label>
+                    <input type="text" class="form-control" id="SubmitRequestTime" placeholder="SubmitRequestTime" value="@((_vin2Booking.Vin2BookingConfigs?.SubmitRequestTimeCS)?.ToString("HH:mm:ss.fff"))">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="SubmitRequestTimespan">SubmitRequestTimespan</label>
+                    <input type="text" class="form-control" id="SubmitRequestTimespan" placeholder="SubmitRequestTimespan" value="@(_vin2Booking.Vin2BookingConfigs?.SubmitRequestTimespan ?? 0)">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="XRequest">SubmitPerAccount</label>
+                    <input type="text" class="form-control" id="XRequest" placeholder="XRequest" value="@(_vin2Booking.Vin2BookingConfigs?.XRequest ?? 1)">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="bookingRaw">BookingTimes</label>
+                    <textarea id="bookingRaw" class="form-control" placeholder="BookingRaw">@_vin2BookingData.Vin2BookingDataRaw</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="form-group">
+                    <button onclick="calcResolveCaptchaTime()" class="btn btn-sm btn-secondary">Safe ResolveCaptchaTime</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-12">
+        <ul id="message-container" class="list-group">
+        </ul>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        app.textareaAutoSize(document.getElementsByTagName('textarea'));
+
+        const startTime = function() {
+            const today = new Date();
+            const h = today.getHours().toString().padStart(2, '0');
+            const m = today.getMinutes().toString().padStart(2, '0');
+            const s = today.getSeconds().toString().padStart(2, '0');
+            document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+            setTimeout(startTime, 1000);
+        }
+        startTime();
+
+        const calcResolveCaptchaTime = function () {
+            var smTime = new Date('0000/01/01 ' + document.getElementById('SubmitRequestTime').value);
+            var rs = new Date(smTime.getTime() + parseInt(document.getElementById('SubmitRequestTimespan').value) - 120000 - 15000);
+            const h = rs.getHours().toString().padStart(2, '0');
+            const m = rs.getMinutes().toString().padStart(2, '0');
+            const s = rs.getSeconds().toString().padStart(2, '0');
+            const ml = rs.getMilliseconds().toString().padStart(3, '0');
+            document.getElementById('ResolveCaptchaTime').value = h + ":" + m + ":" + s + '.' + ml;
+        }
+
+        const postJson = async function (url, data) {
+            const rs = await fetch(url, {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify(data)
+            });
+            return await rs.json();
+        }
+
+        const saveConfigs = async function () {
+            const rs = await postJson('@Url.Action("SaveConfigs")', {
+                accountRaw: document.getElementById('accountRaw').value,
+                bookingRaw: document.getElementById('bookingRaw').value,
+                BookingConfigs: JSON.stringify({
+                    TakeTokenTime: document.getElementById('TakeTokenTime').value,
+                    ResolveCaptchaTime: document.getElementById('ResolveCaptchaTime').value,
+                    SubmitRequestTime: document.getElementById('SubmitRequestTime').value,
+                    SubmitRequestTimespan: document.getElementById('SubmitRequestTimespan').value,
+                    XRequest: document.getElementById('XRequest').value
+                })
+            });
+            if (!rs.Success) {
+                app.error(rs.Message ?? 'SaveConfigs error');
+            } else {
+                app.success(rs.Message ?? 'SaveConfigs success');
+            }
+            return rs.Success;
+        }
+
+        const startBooking = async function (test) {
+            if (test) {
+                const today = new Date();
+
+                today.setSeconds(today.getSeconds() + 10);
+                let h = today.getHours().toString().padStart(2, '0');
+                let m = today.getMinutes().toString().padStart(2, '0');
+                let s = today.getSeconds().toString().padStart(2, '0');
+                let t = h + ":" + m + ":" + s + '.' + '000';
+                document.getElementById('TakeTokenTime').value = t;
+
+                today.setSeconds(today.getSeconds() + 30);
+                h = today.getHours().toString().padStart(2, '0');
+                m = today.getMinutes().toString().padStart(2, '0');
+                s = today.getSeconds().toString().padStart(2, '0');
+                t = h + ":" + m + ":" + s + '.' + '000';
+                document.getElementById('ResolveCaptchaTime').value = t;
+
+                today.setSeconds(today.getSeconds() + 115);
+                h = today.getHours().toString().padStart(2, '0');
+                m = today.getMinutes().toString().padStart(2, '0');
+                s = today.getSeconds().toString().padStart(2, '0');
+                t = h + ":" + m + ":" + s + '.' + '000';
+                document.getElementById('SubmitRequestTime').value = t;
+            }
+            var save = await saveConfigs();
+            if (save) {
+                const rs = await postJson('@Url.Action("StartBooking")', {
+                });
+                if (!rs.Success) {
+                    app.error(rs.Message ?? 'StartBooking error');
+                } else {
+                    app.success(rs.Message ?? 'StartBooking...');
+                }
+            }
+        }
+
+        const takeAccountTokens = async function (countApartment, availableWithUtilityId) {
+            const rs = await postJson('@Url.Action("TakeAccountTokens")?countApartment=' + countApartment + '&availableWithUtilityId=' + availableWithUtilityId, {
+            });
+            if (!rs.Success) {
+                app.error(rs.Message ?? 'TakeAccountTokens error');
+            } else {
+                app.success(rs.Message ?? 'TakeAccountTokens...');
+            }
+        }
+
+        const hubConnect = app.connectHub('/vin2-hub', function (hub) {
+            const addMessage = function (message, state) {
+                const item = document.createElement('li');
+                item.classList.add('list-group-item', state);
+                item.innerText = message;
+                const container = document.getElementById('message-container');
+                container.prepend(item);
+                while (container.children.length > 5000) {
+                    container.removeChild(container.children[container.children.length - 1]);
+                }
+            }
+            hub.on('message', function (message) {
+                addMessage(message, '');
+            });
+            hub.on('error', function (message) {
+                addMessage(message, 'list-group-item-danger');
+            });
+            hub.on('info', function (message) {
+                addMessage(message, 'list-group-item-info');
+            });
+            hub.on('success', function (message) {
+                addMessage(message, 'list-group-item-success');
+            });
+            hub.on('warn', function (message) {
+                addMessage(message, 'list-group-item-warning');
+            });
+            hub.on('receiveObject', function (obj) {
+                if (obj.Type == 'UpdateBookingInfo') {
+                    document.getElementById('takeAccountTokens').innerText = `Login (${obj.TotalAccountToken}/${obj.TotalAccount})`;
+                    document.getElementById('bookingInfo').innerText = `Booking array: ${obj.BookingArray}, Total token: ${obj.TotalAccountToken}, Total booking: ${obj.TotalBooking}`;
+                }
+            });
+        }, 5000, function (hub) {
+            hub.invoke('TakeMessage');
+        });
+        hubConnect.start();
+
+    </script>
+}

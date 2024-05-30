@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vin2", "Vin2\Vin2.csproj", "{FDC6C10A-4A44-4A5F-B8C9-2172447DBF68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vin2Api", "Vin2Api\Vin2Api.csproj", "{E89966FC-3D23-4221-9280-5363C448629A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDC6C10A-4A44-4A5F-B8C9-2172447DBF68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC6C10A-4A44-4A5F-B8C9-2172447DBF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC6C10A-4A44-4A5F-B8C9-2172447DBF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC6C10A-4A44-4A5F-B8C9-2172447DBF68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E89966FC-3D23-4221-9280-5363C448629A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E89966FC-3D23-4221-9280-5363C448629A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E89966FC-3D23-4221-9280-5363C448629A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E89966FC-3D23-4221-9280-5363C448629A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BAABEAA0-C099-4A53-ADB5-97B662A6B584}
+	EndGlobalSection
+EndGlobal
